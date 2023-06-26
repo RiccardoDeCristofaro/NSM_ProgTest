@@ -10,21 +10,30 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 MoveDir;
 
     private Rigidbody2D rb;
+    private Animator animator;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
     private void FixedUpdate()
     {
-        rb.velocity = rb.position + MoveDir * speed * Time.fixedDeltaTime;
+       rb.MovePosition(rb.position + MoveDir * speed * Time.fixedDeltaTime);
     }
     private void Update()
     {
         Inputs();
+        AnimatorSetUp();
     }
     private void Inputs()
     {
-        MoveDir.x = Input.GetAxis("Horizontal");
-        MoveDir.y = Input.GetAxis("Vertical");
+        MoveDir.x = Input.GetAxisRaw("Horizontal");
+        MoveDir.y = Input.GetAxisRaw("Vertical");
+    }
+    private void AnimatorSetUp()
+    {
+        animator.SetFloat("Horizontal", MoveDir.x);
+        animator.SetFloat("Vertical", MoveDir.y);
+        animator.SetFloat("Speed", MoveDir.sqrMagnitude);
     }
 }
