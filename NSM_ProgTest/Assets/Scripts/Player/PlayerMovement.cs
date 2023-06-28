@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-
+using S = System;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("movement speed:")]
     [SerializeField] private float speed;
+    [Header("movement State:")]
     [SerializeField] private Inputs inputsType;
-    private Vector2 MoveDir;
+    [Header("main camera:")]
+    [SerializeField] private Camera mainCam;
 
+    private Vector2 MoveDir;
+    private Vector2 MouseDir;
+    private float xInput;
+    private float yInput;
     private Rigidbody2D rb;
     private Animator animator;
  
@@ -19,38 +21,25 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+    }   
+    private void Update()
+    {
+        SetInputs();
+        SetCameraRotation();
+        AnimatorSetUp();
     }
     private void FixedUpdate()
     {
-        SetInputs();
-    }
-    private void Update()
-    {
-        AnimatorSetUp();
-        InputsSetUp();
+        rb.MovePosition(rb.position + MouseDir * speed * Time.fixedDeltaTime);
+        CalculateLookDirection();
     }
     private void SetInputs()
-    {
-        float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
-        switch(inputsType)
-            {
-            case Inputs.top:
-                rb.MovePosition(new Vector2(rb.position.x, rb.position.y * inputY) * speed * Time.fixedDeltaTime);
-                break;
-            case Inputs.bottom:
-                rb.MovePosition(new Vector2(rb.position.x, rb.position.y / inputY) * speed * Time.fixedDeltaTime);                
-                break;
-            case Inputs.left:
-                rb.MovePosition(new Vector2(rb.position.x / inputX, rb.position.y) * speed * Time.fixedDeltaTime);
-                break;
-            case Inputs.right:
-                rb.MovePosition(new Vector2(rb.position.x * inputX, rb.position.y) * speed * Time.fixedDeltaTime);
-                break;
-        }
-    }
-    private void InputsSetUp()
-    {
+    {     
+        xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
+        MouseDir.y = yInput;
+        MouseDir.x = xInput;
+
         if (Input.GetKeyDown(KeyCode.W))
             inputsType = Inputs.top;
         if (Input.GetKeyDown(KeyCode.D))
@@ -59,7 +48,15 @@ public class PlayerMovement : MonoBehaviour
             inputsType = Inputs.bottom;
         if (Input.GetKeyDown(KeyCode.A))
             inputsType = Inputs.left;
-
+    }
+    private void SetCameraRotation() => mainCam.ScreenToWorldPoint(Input.mousePosition);
+    
+    private void CalculateLookDirection()
+    {
+        float rectAngle = 90;
+        Vector2 lookDir = MouseDir - rb.position;
+        float angleRad = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - rectAngle;
+        rb.rotation = angleRad;
     }
     private void AnimatorSetUp()
     {
