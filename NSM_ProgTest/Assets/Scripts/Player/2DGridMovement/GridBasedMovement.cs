@@ -59,8 +59,8 @@ public class GridBasedMovement : MonoBehaviour
     }
     private void AnimatorSetUp()
     {
-        animator.SetFloat("Horizontal", transform.position.x);
-        animator.SetFloat("Vertical", transform.position.y);
-        animator.SetFloat("Speed", transform.position.sqrMagnitude);
+        animator.SetFloat("Horizontal", xInput);
+        animator.SetFloat("Vertical",yInput);
+        animator.SetFloat("Speed", new Vector2(xInput,yInput).sqrMagnitude);
     }
 }
