@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + MouseDir * speed * Time.fixedDeltaTime);
-        CalculateLookDirection();
+        //CalculateLookDirection();
     }
     private void SetInputs()
     {     
