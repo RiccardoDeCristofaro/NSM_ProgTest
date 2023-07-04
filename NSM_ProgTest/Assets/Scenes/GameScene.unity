@@ -5897,6 +5897,8 @@ MonoBehaviour:
   whatisWall:
     serializedVersion: 2
     m_Bits: 8
+  shootPos: {fileID: 1322565865}
+  mainCam: {fileID: 1503139362}
 --- !u!61 &370186183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5919,9 +5921,9 @@ BoxCollider2D:
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
-  m_AutoTiling: 1
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.16, y: 0.3}
   m_EdgeRadius: 0
 --- !u!114 &370186184
 MonoBehaviour:
@@ -5937,6 +5939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 1322565865}
   Arrow: {fileID: 4003833343136102428, guid: 20e9b87d9fa1918428c4c7e26ea24e2f, type: 3}
+  arrowForce: 10
 --- !u!1 &419125231
 GameObject:
   m_ObjectHideFlags: 0
