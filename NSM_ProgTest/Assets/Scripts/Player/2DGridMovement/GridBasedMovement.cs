@@ -19,11 +19,6 @@ public class GridBasedMovement : MonoBehaviour
     [SerializeField]
     private Transform pointToReach;
     private Animator animator;
-    [Header("Fog Of War :")]
-    [SerializeField]
-    private FogOfWar fog_Class;
-    [SerializeField]
-    private Transform fogOfWar;
     [SerializeField]
     [Range(0, 5)]
     private float sightDistance;
@@ -42,9 +37,6 @@ public class GridBasedMovement : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(CheckFogOfWar(checkInterval));
-        fogOfWar.localScale = new Vector2(sightDistance, sightDistance) * 10f;
-
         pointToReach.parent = null;
     }
     private void Update()
@@ -92,14 +84,6 @@ public class GridBasedMovement : MonoBehaviour
         animator.SetFloat("Horizontal", xInput);
         animator.SetFloat("Vertical", yInput);
         animator.SetFloat("Speed", new Vector2(xInput, yInput).sqrMagnitude);
-    }
-    private IEnumerator CheckFogOfWar(float checkInterval)
-    {
-        while (true)
-        {
-            fog_Class.MakeHole(transform.position, sightDistance);
-            yield return new WaitForSeconds(checkInterval);
-        }
-    }
+    }    
 }
 public enum Inputs { top, right, left, bottom }

@@ -10,8 +10,8 @@ public class FireManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-            Shoot();
+       // if (Input.GetButtonDown("Fire1"))
+            //Shoot();
     }
 
     private void Shoot()
