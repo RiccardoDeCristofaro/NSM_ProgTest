@@ -34,8 +34,11 @@ public class GridBasedMovement : MonoBehaviour
     private Transform shootPos;
     [SerializeField]
     private Camera mainCam;
-    private float xInput;
-    private float yInput;
+    [SerializeField]
+    private float angle;
+    public float xInput;
+    public float yInput;
+
     private Vector2 move;
     private Rigidbody2D rigidbodyPlayer;
 
@@ -55,14 +58,14 @@ public class GridBasedMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-       SetRotationOfArrow();
+       SetRotation();
     }
     private void SetInputs()
     {
         xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
 
-        move = new Vector2 (yInput, xInput);
+        move = new Vector2 (xInput, yInput);
         transform.position = Vector3.MoveTowards(transform.position, pointToReach.position, 1f * speed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, pointToReach.position) <= 0.05f)
@@ -76,17 +79,33 @@ public class GridBasedMovement : MonoBehaviour
                     pointToReach.position += new Vector3(0f, yInput, 0f);
         }
 
-        if (Input.GetKeyDown(KeyCode.W))      
+        if (Input.GetKey(KeyCode.W))
+        {
+            shootPos.localPosition = new Vector3(0,.5f,0);
             inputsPlayer = Inputs.top;
+        }      
+           
                              
-        if (Input.GetKeyDown(KeyCode.S))        
-            inputsPlayer = Inputs.top;
+        if (Input.GetKey(KeyCode.S))
+        {
+            shootPos.localPosition = new Vector3(0, -.5f, 0);
+            inputsPlayer = Inputs.bottom;
+        }      
+            
                     
-        if (Input.GetKeyDown(KeyCode.A))        
-            inputsPlayer = Inputs.top;           
+        if (Input.GetKey(KeyCode.A))
+        {
+            shootPos.localPosition = new Vector3(-.5f, 0f, 0);
+            inputsPlayer = Inputs.left;
+        }
+                      
         
-        if (Input.GetKeyDown(KeyCode.D))       
-            inputsPlayer = Inputs.top;
+        if (Input.GetKey(KeyCode.D))
+        {
+            shootPos.localPosition = new Vector3(0.5f, 0f, 0);
+            inputsPlayer = Inputs.right;
+        }      
+            
                                  
     }
     private Collider2D CheckIfWallOnX()
@@ -103,11 +122,15 @@ public class GridBasedMovement : MonoBehaviour
         animator.SetFloat("Vertical", yInput);
         animator.SetFloat("Speed", new Vector2(xInput, yInput).sqrMagnitude);
     }    
-    private void SetRotationOfArrow()
+    private void SetRotation()
     {
-        Vector2 lookDirection = move;
-        float angle = Mathf.Atan2(lookDirection.x, lookDirection.y) * Mathf.Rad2Deg;
-        rigidbodyPlayer.rotation = angle;
+        //0::0 *57 >> 0°
+        //0::1 * 57 >> 90°
+        //1::0 * 57  >> 90°
+        //0::-1 * 57 >> -90°
+        //-1::0 * 57 >> -90°
+        angle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;    
+        shootPos.rotation = Quaternion.Euler(0,0,angle);
     }
 }
 public enum Inputs { top, right, left, bottom }

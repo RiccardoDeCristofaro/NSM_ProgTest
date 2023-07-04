@@ -7,6 +7,7 @@ public class FireManager : MonoBehaviour
 {
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject Arrow;
+    private GridBasedMovement move;
 
     [SerializeField] float arrowForce;
     private void Update()
@@ -16,9 +17,9 @@ public class FireManager : MonoBehaviour
     }
 
     private void Shoot()
-    {
-        GameObject arrow = Instantiate(Arrow, shootPoint.position, shootPoint.rotation);
-        Rigidbody2D arrowRB = arrow.GetComponent<Rigidbody2D>();
-        arrowRB.AddForce(shootPoint.right * arrowForce, ForceMode2D.Impulse);
+    {     
+            GameObject arrow = Instantiate(Arrow, shootPoint.position, shootPoint.rotation);
+            Rigidbody2D arrowRB = arrow.GetComponent<Rigidbody2D>();
+            arrowRB.AddForce(shootPoint.right * arrowForce, ForceMode2D.Impulse);    
     }
 }
