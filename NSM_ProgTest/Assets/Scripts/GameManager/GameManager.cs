@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
-
+using System;
 public class GameManager : MonoBehaviour
 {
     [Header("backgrounds tiles")]
@@ -16,15 +11,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] public Tilemap BlurredMap;
     [SerializeField] public Tile BlurredTile;
     [SerializeField] private Vector3 gridOffset;
+    private MapSingleTile _tile;
 
+    [SerializeField] private GameObject[,] spawnPoints;
     [SerializeField] Transform playerPos;
     [SerializeField] float overLapCircleRadius;
-    [SerializeField] private MapSingleTile _tile;
-    // Use this for initialization
+     System.Random rand = new System.Random();
+
     void Start()
     {
-         BlurredMap.origin = BackgroundMap.origin;
-         BlurredMap.size = BackgroundMap.size;
+        BlurredMap.origin = BackgroundMap.origin;
+        BlurredMap.size = BackgroundMap.size;
 
         foreach (Vector3Int blurTilespos in BlurredMap.cellBounds.allPositionsWithin)
         {
@@ -39,10 +36,10 @@ public class GameManager : MonoBehaviour
         {
             foreach (Vector3Int blurTilespos in BlurredMap.cellBounds.allPositionsWithin)
             {
-                if(blurTilespos == playerPos.position)
+                if (blurTilespos == playerPos.position)
                 {
                     BlurredMap.SetTile(blurTilespos, null);
-                }              
+                }
             }
             SingleTile();
         }
@@ -58,6 +55,15 @@ public class GameManager : MonoBehaviour
             _tile.tileMap.SetTileFlags(_tile.localPlace, TileFlags.None);
             _tile.tileMap.SetColor(_tile.localPlace, passedTile.color);
         }
+    }
+    public void SpawnNewPlayer(GameObject player)
+    {
+        GameObject spawnPoint = RandomPlayerSpawn();
+        player.transform.position = spawnPoint.transform.position;
+    }
+    public GameObject RandomPlayerSpawn()
+    {
+        return spawnPoints[rand.Next(BackgroundMap.origin.x, BackgroundMap.size.x), rand.Next(BackgroundMap.origin.y, BackgroundMap.size.y)];
     }
     private void OnDrawGizmos()
     {

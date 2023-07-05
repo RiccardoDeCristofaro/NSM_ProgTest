@@ -36,10 +36,10 @@ public class GridBasedMovement : MonoBehaviour
     private Camera mainCam;
     [SerializeField]
     private float angle;
-    public float xInput;
-    public float yInput;
-
-    private Vector2 move;
+    [HideInInspector]
+    public Vector2 move;
+    private float xInput;
+    private float yInput;   
     private Rigidbody2D rigidbodyPlayer;
 
     private void Awake()
@@ -55,10 +55,6 @@ public class GridBasedMovement : MonoBehaviour
     {
         SetInputs();
         AnimatorSetUp();
-    }
-    private void FixedUpdate()
-    {
-       SetRotation();
     }
     private void SetInputs()
     {
@@ -122,15 +118,5 @@ public class GridBasedMovement : MonoBehaviour
         animator.SetFloat("Vertical", yInput);
         animator.SetFloat("Speed", new Vector2(xInput, yInput).sqrMagnitude);
     }    
-    private void SetRotation()
-    {
-        //0::0 *57 >> 0°
-        //0::1 * 57 >> 90°
-        //1::0 * 57  >> 90°
-        //0::-1 * 57 >> -90°
-        //-1::0 * 57 >> -90°
-        angle = Mathf.Atan2(move.y, move.x) * Mathf.Rad2Deg;    
-        shootPos.rotation = Quaternion.Euler(0,0,angle);
-    }
 }
 public enum Inputs { top, right, left, bottom }
