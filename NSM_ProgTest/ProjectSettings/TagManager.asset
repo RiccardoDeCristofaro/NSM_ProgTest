@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Arrow
   - Walls
+  - Monster
+  - Teleport
+  - Puddle
   layers:
   - Default
   - TransparentFX
@@ -14,9 +17,9 @@ TagManager:
   - Water
   - UI
   - MovementTiles
-  - 
-  - 
-  - 
+  - Tunnels
+  - GameOver
+  - Teleport
   - 
   - 
   - 
@@ -45,4 +48,7 @@ TagManager:
     locked: 0
   - name: BlurredLayer
     uniqueID: 4080112469
+    locked: 0
+  - name: Tunnel
+    uniqueID: 3797851477
     locked: 0

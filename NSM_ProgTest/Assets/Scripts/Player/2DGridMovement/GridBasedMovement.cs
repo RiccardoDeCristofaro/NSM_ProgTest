@@ -15,7 +15,7 @@ public class GridBasedMovement : MonoBehaviour
     [SerializeField]
     private Inputs inputsPlayer;
 
-    [Header("player Pos :")]
+    [Header("hitObj Pos :")]
     [SerializeField]
     private Transform pointToReach;
 

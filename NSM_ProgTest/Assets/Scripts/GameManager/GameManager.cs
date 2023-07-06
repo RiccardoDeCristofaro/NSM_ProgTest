@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector3 gridOffset;
     private MapSingleTile _tile;
 
-    [SerializeField] private GameObject[,] spawnPoints;
+    [SerializeField] private Vector3Int spawnPoint;
     [SerializeField] Transform playerPos;
     [SerializeField] float overLapCircleRadius;
      System.Random rand = new System.Random();
@@ -58,13 +58,11 @@ public class GameManager : MonoBehaviour
     }
     public void SpawnNewPlayer(GameObject player)
     {
-        GameObject spawnPoint = RandomPlayerSpawn();
-        player.transform.position = spawnPoint.transform.position;
+        Vector3Int spawnPoint = RandomPlayerSpawn();
+        Instantiate(player, spawnPoint, Quaternion.identity);
     }
-    public GameObject RandomPlayerSpawn()
-    {
-        return spawnPoints[rand.Next(BackgroundMap.origin.x, BackgroundMap.size.x), rand.Next(BackgroundMap.origin.y, BackgroundMap.size.y)];
-    }
+    public Vector3Int RandomPlayerSpawn() => new Vector3Int(BackgroundMap.origin.x, BackgroundMap.size.x, BackgroundMap.size.z);
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(playerPos.position, overLapCircleRadius);

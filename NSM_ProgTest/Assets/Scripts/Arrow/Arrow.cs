@@ -8,6 +8,7 @@ public class Arrow : MonoBehaviour
 {
     public Vector2 velocity;
     private GameManager gameManager;
+    GameObject hitObj;
     private void Update()
     {
         Vector2 currentPos = new Vector2(transform.position.x, transform.position.y);
@@ -20,13 +21,13 @@ public class Arrow : MonoBehaviour
         
         foreach(RaycastHit2D hit in hitsObjects)
         {
-           GameObject obj = hit.collider.gameObject;
-            if (obj.CompareTag("Player"))
+            hitObj = hit.collider.gameObject;
+            if (hitObj.CompareTag("Player"))
             {
-                Destroy(obj);             
+                Destroy(hitObj.gameObject);             
                 break;
             }
-            if (obj.CompareTag("Walls"))
+            if (hitObj.CompareTag("Walls"))
             {
                 Destroy(gameObject);
                 break;
