@@ -9,6 +9,7 @@ TagManager:
   - Monster
   - Teleport
   - Puddle
+  - Tunnel
   layers:
   - Default
   - TransparentFX

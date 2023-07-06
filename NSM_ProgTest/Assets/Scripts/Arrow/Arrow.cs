@@ -21,17 +21,7 @@ public class Arrow : MonoBehaviour
         
         foreach(RaycastHit2D hit in hitsObjects)
         {
-            hitObj = hit.collider.gameObject;
-            if (hitObj.CompareTag("Player"))
-            {
-                Destroy(hitObj.gameObject);             
-                break;
-            }
-            if (hitObj.CompareTag("Walls"))
-            {
-                Destroy(gameObject);
-                break;
-            }
+            hitObj = hit.collider.gameObject;           
         }
 
         transform.position = newPos;

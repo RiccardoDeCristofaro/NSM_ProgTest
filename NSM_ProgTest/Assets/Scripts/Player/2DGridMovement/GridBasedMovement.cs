@@ -29,6 +29,8 @@ public class GridBasedMovement : MonoBehaviour
 
     [SerializeField]
     private LayerMask whatisWall;
+    [SerializeField]
+    private LayerMask whatisTunnel;
 
     [SerializeField]
     private Transform shootPos;
@@ -40,11 +42,9 @@ public class GridBasedMovement : MonoBehaviour
     public Vector2 move;
     private float xInput;
     private float yInput;   
-    private Rigidbody2D rigidbodyPlayer;
 
     private void Awake()
     {
-        rigidbodyPlayer = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
     private void Start()
@@ -79,30 +79,25 @@ public class GridBasedMovement : MonoBehaviour
         {
             shootPos.localPosition = new Vector3(0,.5f,0);
             inputsPlayer = Inputs.top;
-        }      
-           
+        }                
                              
         if (Input.GetKey(KeyCode.S))
         {
             shootPos.localPosition = new Vector3(0, -.5f, 0);
             inputsPlayer = Inputs.bottom;
-        }      
-            
+        }                 
                     
         if (Input.GetKey(KeyCode.A))
         {
             shootPos.localPosition = new Vector3(-.5f, 0f, 0);
             inputsPlayer = Inputs.left;
-        }
-                      
+        }                      
         
         if (Input.GetKey(KeyCode.D))
         {
             shootPos.localPosition = new Vector3(0.5f, 0f, 0);
             inputsPlayer = Inputs.right;
-        }      
-            
-                                 
+        }                                                  
     }
     private Collider2D CheckIfWallOnX()
     {
