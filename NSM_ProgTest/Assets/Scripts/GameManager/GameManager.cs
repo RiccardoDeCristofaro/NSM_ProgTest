@@ -10,23 +10,7 @@ public class GameManager : MonoBehaviour
 {
 
     protected GameManager instance;
-
-    [Tooltip("Tunnel Implementation")]    
-    [SerializeField] private int tunnelNumbers;
-    [Header("Tunnel:")]
-    public Tunnel tunnel;
-    //public Tunnel[] tunnels;
-
-    [Serializable]
-    public struct Tunnel
-    {
-        public GameObject[] tunnelPoints;
-        [Range(.2f, 5f)]
-        public float playerSpeedUnderTunnel;
-        public int numberOfPoints;
-        public Vector3 actualPos;
-        public int nextPoint;
-    }
+  
     [Header("backgrounds tiles")]
     [SerializeField] public Tilemap BackgroundMap;
     [SerializeField] LayerMask backgroundTiles;
@@ -46,13 +30,6 @@ public class GameManager : MonoBehaviour
 
     [Header("arrow info")]
     [SerializeField] GameObject arrow;
-
-    private void Awake()
-    { 
-        if(instance == null) instance = this;
-
-        DontDestroyOnLoad(gameObject);
-    }
     void Start()
     {
         BlurredMap.origin = BackgroundMap.origin;
@@ -67,7 +44,6 @@ public class GameManager : MonoBehaviour
             BlurredMap.SetTile(blurTilespos, BlurredTile);
         }
         BlurredMap.transform.position = new Vector3(-.5f, -.5f, 0f);
-
     }
     private void Update()
     {
@@ -82,10 +58,6 @@ public class GameManager : MonoBehaviour
             }
             SingleTile();
         }
-        // PathScriptingTunnel(tunnelNumbers, player.gameObject);
-        //else if (arrow.gameObject.CompareTag("Arrow"))
-        //    SingleTunnel();
-           //PathScriptingTunnel(tunnelNumbers, arrow.gameObject);
     }
     private void SingleTile()
     {
@@ -98,33 +70,5 @@ public class GameManager : MonoBehaviour
             _tile.tileMap.SetTileFlags(_tile.localPlace, TileFlags.None);
             _tile.tileMap.SetColor(_tile.localPlace, passedTile.color);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(playerPos.position, overLapCircleRadius);
-    }
-    //private void PathScriptingTunnel(int tunnels, GameObject obj)
-    //{       
-    //        this.tunnels[i].actualPos = obj.transform.position;
-    //        obj.transform.position = Vector3.MoveTowards(
-    //            this.tunnels[i].actualPos,
-    //            this.tunnels[i].tunnelPoints[this.tunnels[i].currentPoint].transform.position,
-    //            this.tunnels[i].playerSpeedUnderTunnel * Time.deltaTime
-    //            );
-
-    //        if (this.tunnels[i].actualPos == this.tunnels[i].tunnelPoints[this.tunnels[i].currentPoint].transform.position
-    //            && this.tunnels[i].currentPoint != this.tunnels[i].numberOfPoints - 1)
-    //            this.tunnels[i].currentPoint++;        
-    //}
-    public void SingleTunnel(GameObject player)
-    {
-        tunnel.actualPos = player.transform.position;
-        player.transform.position = Vector3.MoveTowards(tunnel.actualPos, tunnel.tunnelPoints[tunnel.nextPoint].transform.position, tunnel.playerSpeedUnderTunnel * Time.deltaTime);
-
-        if(tunnel.actualPos == tunnel.tunnelPoints[tunnel.nextPoint].transform.position && tunnel.nextPoint != tunnel.numberOfPoints -1)
-        {
-            tunnel.nextPoint++;
-        }
-    }
+    }    
 }

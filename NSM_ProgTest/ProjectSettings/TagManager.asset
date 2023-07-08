@@ -10,6 +10,7 @@ TagManager:
   - Teleport
   - Puddle
   - Tunnel
+  - TunnelExit
   layers:
   - Default
   - TransparentFX

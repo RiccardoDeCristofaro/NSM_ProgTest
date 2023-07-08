@@ -177,9 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a5bc0172c40dd438f8ebc4f532c7b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
   inputsPlayer: 1
-  pointToReach: {fileID: 0}
+  pointToReach: {fileID: 2053931708564052771}
   sightDistance: 0.41
   checkInterval: 0.25
   whatisWall:
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132256275438334773}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d89f4ed112870c74095b04f501a48c92, type: 3}
   m_Name: 
@@ -222,7 +222,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.025267735}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -233,7 +233,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.3}
+  m_Size: {x: 0.16, y: 0.24946454}
   m_EdgeRadius: 0
 --- !u!114 &6472115691624212210
 MonoBehaviour:
@@ -249,6 +249,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EndGame: {fileID: 0}
   backGround: {fileID: 0}
+  gameManager: {fileID: 0}
+  colliderName: 
+  TunnelTriggered: 0
 --- !u!1 &2132256276642341916
 GameObject:
   m_ObjectHideFlags: 0

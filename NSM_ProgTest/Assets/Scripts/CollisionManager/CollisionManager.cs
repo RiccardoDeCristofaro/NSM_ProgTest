@@ -13,20 +13,19 @@ public class CollisionManager : MonoBehaviour
 
     [SerializeField] Tilemap backGround;
 
-    private GameManager  gameManager;
+    public GameManager  gameManager;
 
     System.Random rand = new System.Random();
 
-    private void Awake()
-    {
-        gameManager = GetComponent<GameManager>();
-    }
+    public string colliderName;
+    public bool TunnelTriggered;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.tag)
         {
             case "Monster":
-                Debug.Log(collision.gameObject.name);
+                Debug.Log(collision.gameObject.name);               
                 GetComponent<GridBasedMovement>().enabled = false;
                 EndGame.SetActive(true);
                 break;
@@ -45,15 +44,18 @@ public class CollisionManager : MonoBehaviour
                     0);
                 gameObject.GetComponent<GridBasedMovement>().enabled = false;
                 transform.position = newPlayerPos;
-                gameObject.GetComponent<GridBasedMovement>().enabled = true;
                 break;
-
             case "Tunnel":
-                Debug.Log(collision.gameObject.name);
-                gameManager.SingleTunnel(gameObject);
-                break;
-        }
+                Debug.Log(collision.gameObject.name);                
+                colliderName = collision.gameObject.name;
+                TunnelTriggered = true;
 
-        
+                break;
+            case "TunnelExit":
+                Debug.Log(collision.gameObject.name);
+                colliderName = collision.gameObject.name;
+                TunnelTriggered = false;
+                break;
+        }       
     }
 }
