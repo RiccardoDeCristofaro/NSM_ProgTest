@@ -55,8 +55,8 @@ public class GameManager : MonoBehaviour
                 {
                     BlurredMap.SetTile(blurTilespos, null);
                 }
+                SingleTile();
             }
-            SingleTile();
         }
     }
     private void SingleTile()

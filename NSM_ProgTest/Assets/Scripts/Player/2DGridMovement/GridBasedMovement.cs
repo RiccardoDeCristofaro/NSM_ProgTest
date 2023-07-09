@@ -41,11 +41,20 @@ public class GridBasedMovement : MonoBehaviour
     [HideInInspector]
     public Vector2 move;
     private float xInput;
-    private float yInput;   
+    private float yInput;
+
+    private GridBasedMovement instance;
+
+    protected GridBasedMovement Instance
+    {
+        get { return instance; }
+        set { instance = value; }
+    }
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        instance = this;
     }
     private void Start()
     {

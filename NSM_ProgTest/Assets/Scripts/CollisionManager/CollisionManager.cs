@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,21 +12,30 @@ public class CollisionManager : MonoBehaviour
 
     [SerializeField] GameObject EndGame;
 
-    [SerializeField] Tilemap backGround;
+    [SerializeField] Tilemap twentyxtwenty;
 
-    public GameManager  gameManager;
+    [SerializeField] GameObject pointToReach;
+    public GameManager gameManager;
 
-    System.Random rand = new System.Random();
+    public int randomNumber1;
+    public int randomNumber2;
+
+    public int maxTeleportAreaX;
+    public int maxTeleportAreaY;
 
     public string colliderName;
-    public bool TunnelTriggered;
 
+    private void Start()
+    {
+        maxTeleportAreaX = twentyxtwenty.size.x / 2;
+        maxTeleportAreaY = twentyxtwenty.size.y / 2;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.tag)
         {
             case "Monster":
-                Debug.Log(collision.gameObject.name);               
+                Debug.Log(collision.gameObject.name);
                 GetComponent<GridBasedMovement>().enabled = false;
                 EndGame.SetActive(true);
                 break;
@@ -37,25 +47,23 @@ public class CollisionManager : MonoBehaviour
                 break;
 
             case "Teleport":
+                randomNumber1 = Random.Range(-maxTeleportAreaX, maxTeleportAreaX);
+                randomNumber1 = Random.Range(-maxTeleportAreaY, maxTeleportAreaY);
                 Debug.Log(collision.gameObject.name);
-                Vector3Int newPlayerPos = new Vector3Int(
-                Mathf.Clamp(rand.Next(), -backGround.size.x / 4, backGround.size.x / 4),
-                    Mathf.Clamp(rand.Next(), -backGround.size.y / 4, backGround.size.y / 4),
-                    0);
-                gameObject.GetComponent<GridBasedMovement>().enabled = false;
-                transform.position = newPlayerPos;
+                Vector3Int newPlayerPos = new(randomNumber1, randomNumber2, 0);
+                if (newPlayerPos != new Vector3Int(8, -2, 0))
+                {
+                    transform.position = newPlayerPos;
+                    pointToReach.transform.position = newPlayerPos;
+
+                    break;
+                }
                 break;
             case "Tunnel":
-                Debug.Log(collision.gameObject.name);                
-                colliderName = collision.gameObject.name;
-                TunnelTriggered = true;
-
-                break;
-            case "TunnelExit":
                 Debug.Log(collision.gameObject.name);
                 colliderName = collision.gameObject.name;
-                TunnelTriggered = false;
                 break;
-        }       
+
+        }
     }
 }

@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 2132256275438334780}
   - component: {fileID: 2132256275438334771}
   - component: {fileID: 6472115691624212210}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132256275438334773}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d89f4ed112870c74095b04f501a48c92, type: 3}
   m_Name: 
@@ -248,8 +248,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EndGame: {fileID: 0}
-  backGround: {fileID: 0}
+  twentyxtwenty: {fileID: 0}
+  pointToReach: {fileID: 188775335512769942}
   gameManager: {fileID: 0}
+  randomNumber1: 0
+  randomNumber2: 0
+  maxTeleportAreaX: 0
+  maxTeleportAreaY: 0
   colliderName: 
   TunnelTriggered: 0
 --- !u!1 &2132256276642341916
