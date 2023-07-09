@@ -2009,7 +2009,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "- wasd to move around\n- try to avoid the monster\nand the puddles\n-
+  m_Text: "- WASD to move around\n- try to avoid the monster\nand the puddles\n-
     there are tunnel cells\nwhich allow you to move faster.\n-you have five arrows
     , shoot\n them pressing left mouse click\n and try to kill the monster\n- the
     wall destroys your arrow and \nthe monster could be anywhere in the map.\nbe

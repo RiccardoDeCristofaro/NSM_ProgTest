@@ -15,6 +15,13 @@ public class CollisionManager : MonoBehaviour
     [SerializeField] Tilemap twentyxtwenty;
 
     [SerializeField] GameObject pointToReach;
+    [SerializeField] LayerMask monsterLayer;
+    [SerializeField] LayerMask puddleLayer;
+    [SerializeField] LayerMask teleportLayer;
+
+    [SerializeField] GameObject monsterUI;
+    [SerializeField] GameObject puddleUI;
+    [SerializeField] GameObject TeleportUI;
     protected GameManager gameManager;
 
     internal int randomNumber1;
@@ -24,11 +31,32 @@ public class CollisionManager : MonoBehaviour
     internal int maxTeleportAreaY;
 
     public string colliderName;
+    private float radius = 1f;
 
     private void Start()
     {
         maxTeleportAreaX = twentyxtwenty.size.x / 2;
         maxTeleportAreaY = twentyxtwenty.size.y / 2;
+    }
+
+    private void Update()
+    {
+
+        if (Physics2D.OverlapCircle(transform.position, radius, monsterLayer))
+            monsterUI.SetActive(true);
+        else
+        { monsterUI.SetActive(false); }
+
+        if (Physics2D.OverlapCircle(transform.position, radius, puddleLayer))
+            puddleUI.SetActive(true);
+        else
+        { puddleUI.SetActive(false); }
+
+        if (Physics2D.OverlapCircle(transform.position, radius, teleportLayer))
+            TeleportUI.SetActive(true);
+        else
+        { TeleportUI.SetActive(false); }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
