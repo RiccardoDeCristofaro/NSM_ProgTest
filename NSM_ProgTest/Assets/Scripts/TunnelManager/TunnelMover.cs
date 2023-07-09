@@ -22,7 +22,7 @@ public class TunnelMover : MonoBehaviour
     private void Start() => ObjectInside = false;
     private void Update()
     {
-        if(ObjectInside)
+        if (ObjectInside)
         {
             MoveUnderTunnel();
 
@@ -33,22 +33,23 @@ public class TunnelMover : MonoBehaviour
                 ObjectInside = false;
 
                 if (gameObjectInside.name == "Player")
+                {
                     gameObjectInside.GetComponent<GridBasedMovement>().enabled = true;
+                    playerPoint.transform.position = wayPoints.points[currentPos - 1].position;
+                }
                 else
                     gameObjectInside.GetComponent<Arrow>().enabled = true;
-
-                playerPoint.transform.position = wayPoints.points[currentPos -1].position;
             }
-                
-        }                  
+
+        }
     }
     private void MoveUnderTunnel()
     {
-        gameObjectInside.transform.position = Vector2.MoveTowards(gameObjectInside.transform.position, wayPoints.points[currentPos].position, tunnelSpeed * Time.deltaTime);   
+        gameObjectInside.transform.position = Vector2.MoveTowards(gameObjectInside.transform.position, wayPoints.points[currentPos].position, tunnelSpeed * Time.deltaTime);
     }
     private void DistanceBeetweenPoints()
     {
-        if (Vector2.Distance(gameObjectInside.transform.position, wayPoints.points[currentPos].position) < distanceTreshHoldfromPointToPoint && currentPos <= wayPoints.points.Count -1)
+        if (Vector2.Distance(gameObjectInside.transform.position, wayPoints.points[currentPos].position) < distanceTreshHoldfromPointToPoint && currentPos <= wayPoints.points.Count - 1)
         {
             wayPoints.GetNextPoint(wayPoints.points[currentPos]);
             currentPos++;
@@ -56,14 +57,14 @@ public class TunnelMover : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             ObjectInside = true;
             collision.gameObject.GetComponent<GridBasedMovement>().enabled = false;
             currentPos = 0;
             gameObjectInside = collision.gameObject;
-            colliders.ForEach(coll =>  coll.gameObject.transform.GetComponent<Collider2D>().enabled = false);
-            
+            colliders.ForEach(coll => coll.gameObject.transform.GetComponent<Collider2D>().enabled = false);
+
         }
         else if (collision.CompareTag("Arrow"))
         {
