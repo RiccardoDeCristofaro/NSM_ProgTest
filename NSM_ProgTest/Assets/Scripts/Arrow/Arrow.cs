@@ -7,11 +7,14 @@ using UnityEditor;
 public class Arrow : MonoBehaviour
 {
     public Vector2 velocity;
+    public Quaternion rotation;
     public LayerMask moveTiles;
     private void Update()
     {
         Vector2 currentPos = new Vector2(transform.position.x, transform.position.y);
         Vector2 newPos = currentPos + velocity * Time.deltaTime;
+
+        transform.rotation = Quaternion.LookRotation(Vector3.forward);
 
         RaycastHit2D[] hitsObjects = Physics2D.LinecastAll(currentPos, newPos, ~ moveTiles);
 
@@ -28,6 +31,7 @@ public class Arrow : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Walls"))
         Destroy(gameObject);
     }
 }

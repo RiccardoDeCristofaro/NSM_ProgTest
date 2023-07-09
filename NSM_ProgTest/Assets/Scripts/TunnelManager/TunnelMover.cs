@@ -10,6 +10,7 @@ public class TunnelMover : MonoBehaviour
     [Header("Tunnel:")]
     [SerializeField] private WayPoints wayPoints;
     [SerializeField] private LayerMask tunneLayer;
+    [SerializeField] List<Collider2D> colliders;
     [SerializeField] private float tunnelSpeed;
     [SerializeField] private float distanceTreshHoldfromPointToPoint = 0.1f;
     [SerializeField] private int currentPos;
@@ -36,14 +37,14 @@ public class TunnelMover : MonoBehaviour
                 else
                     gameObjectInside.GetComponent<Arrow>().enabled = true;
 
-                playerPoint.transform.SetParent(null);
+                playerPoint.transform.position = wayPoints.points[currentPos -1].position;
             }
                 
         }                  
     }
     private void MoveUnderTunnel()
     {
-        gameObjectInside.transform.position = Vector2.MoveTowards(gameObjectInside.transform.position, wayPoints.points[currentPos].position, tunnelSpeed * Time.deltaTime);        
+        gameObjectInside.transform.position = Vector2.MoveTowards(gameObjectInside.transform.position, wayPoints.points[currentPos].position, tunnelSpeed * Time.deltaTime);   
     }
     private void DistanceBeetweenPoints()
     {
@@ -61,7 +62,8 @@ public class TunnelMover : MonoBehaviour
             collision.gameObject.GetComponent<GridBasedMovement>().enabled = false;
             currentPos = 0;
             gameObjectInside = collision.gameObject;
-            playerPoint.transform.SetParent(gameObjectInside.transform, true);
+            colliders.ForEach(coll =>  coll.gameObject.transform.GetComponent<Collider2D>().enabled = false);
+            
         }
         else if (collision.CompareTag("Arrow"))
         {
@@ -69,6 +71,7 @@ public class TunnelMover : MonoBehaviour
             collision.gameObject.GetComponent<Arrow>().enabled = false;
             currentPos = 0;
             gameObjectInside = collision.gameObject;
+            colliders.ForEach(coll => coll.gameObject.transform.GetComponent<Collider2D>().enabled = false);
         }
     }
 }
