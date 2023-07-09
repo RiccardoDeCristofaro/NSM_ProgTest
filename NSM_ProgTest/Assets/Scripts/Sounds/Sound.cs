@@ -28,7 +28,7 @@ public class Sound
 }
 public enum AudioType
 {
-    audioSource,
-    audioListener
+    AudioSound,
+    AudioSfx
 }
 

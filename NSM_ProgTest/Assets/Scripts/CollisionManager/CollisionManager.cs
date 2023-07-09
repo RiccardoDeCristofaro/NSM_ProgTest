@@ -15,13 +15,13 @@ public class CollisionManager : MonoBehaviour
     [SerializeField] Tilemap twentyxtwenty;
 
     [SerializeField] GameObject pointToReach;
-    public GameManager gameManager;
+    protected GameManager gameManager;
 
-    public int randomNumber1;
-    public int randomNumber2;
+    internal int randomNumber1;
+    internal int randomNumber2;
 
-    public int maxTeleportAreaX;
-    public int maxTeleportAreaY;
+    internal int maxTeleportAreaX;
+    internal int maxTeleportAreaY;
 
     public string colliderName;
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -9,8 +10,6 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField]
     Sound[] sounds;
-    [SerializeField]
-    AudioListener[] listeners;
 
     private static AudioManager instance;
 
@@ -23,27 +22,8 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(instance);
 
-        foreach (var listener in from CustomListener listener in listeners
-                                 where listener._AudioType == AudioType.audioListener
-                                 select listener)
-        {
-            listener.listenerInstance = gameObject.AddComponent<AudioListener>();
-        }
-
-        foreach (Sound sound in sounds)
-        {
-            if (sound._AudioType == AudioType.audioSource)
-                sound.customAudioSource = gameObject.AddComponent<AudioSource>();
-
-            sound.customAudioSource.name = sound.name;
-            sound.customAudioSource.clip = sound.audioClip;
-            sound.customAudioSource.outputAudioMixerGroup = sound.audioMixerGroup;
-            sound.customAudioSource.mute = sound.mute;
-            sound.customAudioSource.playOnAwake = sound.playOnAwake;
-            sound.customAudioSource.loop = sound.loop;
-            sound.customAudioSource.volume = sound.volume;
-            sound.customAudioSource.pitch = sound.pitch;
-        }
+        SettingCustomSound();
+       
     }
     /// <summary>
     /// assembly definition should have this refence guid to call this method 
@@ -57,9 +37,37 @@ public class AudioManager : MonoBehaviour
         Sound sound = Array.Find(sounds, sound => sound.name == name);
         if (sound == null)
         {
-            Debug.LogError(string.Format($"sound inserted: {name} not found"));
+            Debug.LogError(string.Format($"Sfx inserted: {name} not found"));
             return;
         }
         sound.customAudioSource?.Play();
+    }
+    public void SfxPlay(string name)
+    {
+        Sound Sfx = Array.Find(sounds, sound => sound.name == name);
+        if (Sfx == null)
+        {
+            Debug.LogError(string.Format($"Sfx inserted: {name} not found"));
+            return;
+        }
+        Sfx.customAudioSource?.Play();
+    }
+    private void SettingCustomSound()
+    {
+        foreach (Sound sound in sounds)
+        {
+            if (sound._AudioType == AudioType.AudioSound || sound._AudioType == AudioType.AudioSfx)
+            {
+                sound.customAudioSource = gameObject.AddComponent<AudioSource>();
+                sound.customAudioSource.name = sound.name;
+                sound.customAudioSource.clip = sound.audioClip;
+                sound.customAudioSource.outputAudioMixerGroup = sound.audioMixerGroup;
+                sound.customAudioSource.mute = sound.mute;
+                sound.customAudioSource.playOnAwake = sound.playOnAwake;
+                sound.customAudioSource.loop = sound.loop;
+                sound.customAudioSource.volume = sound.volume;
+                sound.customAudioSource.pitch = sound.pitch;
+            }           
+        }
     }
 }

@@ -30,8 +30,13 @@ public class TunnelMover : MonoBehaviour
             if (currentPos == wayPoints.points.Count)
             {
                 ObjectInside = false;
-                gameObjectInside.GetComponent<GridBasedMovement>().enabled = true ? gameObjectInside.name == "Player" : gameObjectInside.GetComponent<Arrow>().enabled = true;
-                playerPoint.transform.SetParent(gameObjectInside.transform, false);
+
+                if (gameObjectInside.name == "Player")
+                    gameObjectInside.GetComponent<GridBasedMovement>().enabled = true;
+                else
+                    gameObjectInside.GetComponent<Arrow>().enabled = true;
+
+                playerPoint.transform.SetParent(null);
             }
                 
         }                  

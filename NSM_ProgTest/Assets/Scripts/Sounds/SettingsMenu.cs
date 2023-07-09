@@ -10,7 +10,8 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Slider sliderSfx;
 
     private void Start()
-    {
+    {    
+
         if (PlayerPrefs.HasKey("MusicVolume"))
             LoadVolume();
         else
@@ -30,7 +31,7 @@ public class SettingsMenu : MonoBehaviour
     public void SetSfxVolume()
     {
         float Sfxvolume = sliderSfx.value;
-        audioMixer.SetFloat("SfxSound", Mathf.Log10(Sfxvolume) * 20);
+        audioMixer.SetFloat("Sfx", Mathf.Log10(Sfxvolume) * 20);
         PlayerPrefs.SetFloat("SfxVolume", Sfxvolume);
     }
 
