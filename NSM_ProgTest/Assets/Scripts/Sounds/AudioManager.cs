@@ -17,10 +17,11 @@ public class AudioManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        else { Destroy(instance); return; }
+        else
+            Destroy(gameObject); 
 
 
-        DontDestroyOnLoad(instance);
+        DontDestroyOnLoad(gameObject);
 
         SettingCustomSound();
        

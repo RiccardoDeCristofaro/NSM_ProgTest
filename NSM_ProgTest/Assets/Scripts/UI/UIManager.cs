@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] protected Button Settings;
     [SerializeField] protected Button ExitPauseButton;
     [SerializeField] protected Button QuitFromPause;
+    [SerializeField] protected Button YouWonButton;
+    [SerializeField] protected Button ExitwonGame;
  
     private Scene currentScene;
     void Awake()
@@ -27,6 +29,9 @@ public class UIManager : MonoBehaviour
         ResumeGame.onClick.AddListener(UnPause);
         ExitPauseButton.onClick.AddListener(QuitGame);    
         QuitFromPause.onClick.AddListener(UnPause);
+
+        YouWonButton.onClick.AddListener(RestartScene);
+        ExitwonGame.onClick.AddListener(QuitGame);
     }
     private void Update()
     {

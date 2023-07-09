@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2053931708564052771}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: playerPoint
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 2132256275438334780}
   - component: {fileID: 2132256275438334771}
   - component: {fileID: 6472115691624212210}
-  m_Layer: 10
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a5bc0172c40dd438f8ebc4f532c7b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 3
   inputsPlayer: 1
   pointToReach: {fileID: 2053931708564052771}
   sightDistance: 0.41
@@ -250,13 +250,7 @@ MonoBehaviour:
   EndGame: {fileID: 0}
   twentyxtwenty: {fileID: 0}
   pointToReach: {fileID: 188775335512769942}
-  gameManager: {fileID: 0}
-  randomNumber1: 0
-  randomNumber2: 0
-  maxTeleportAreaX: 0
-  maxTeleportAreaY: 0
   colliderName: 
-  TunnelTriggered: 0
 --- !u!1 &2132256276642341916
 GameObject:
   m_ObjectHideFlags: 0

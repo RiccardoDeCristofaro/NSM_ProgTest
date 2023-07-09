@@ -7,40 +7,28 @@ public class SettingsMenu : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider sliderVolume;
-    [SerializeField] private Slider sliderSfx;
 
+    const string MixerMusic = "MasterVolume";
+    private void Awake()
+    {
+        sliderVolume.onValueChanged.AddListener(SetMasterVolume);
+    }
     private void Start()
     {    
-
-        if (PlayerPrefs.HasKey("MusicVolume"))
+        if (PlayerPrefs.HasKey(MixerMusic))
             LoadVolume();
         else
-            SetMusicVolume();
-
-        if (PlayerPrefs.HasKey("SfxVolume"))
-            LoadSfx();
-        else
-            SetSfxVolume();
+            SetMasterVolume(sliderVolume.value);      
     }
-    public void SetMusicVolume()
-    {
-        float volume = sliderVolume.value;
-        audioMixer.SetFloat("Music", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("MusicVolume", volume);
+     void SetMasterVolume(float volume)
+    {       
+        audioMixer.SetFloat(MixerMusic, Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat(MixerMusic, volume);
     }
-    public void SetSfxVolume()
-    {
-        float Sfxvolume = sliderSfx.value;
-        audioMixer.SetFloat("Sfx", Mathf.Log10(Sfxvolume) * 20);
-        PlayerPrefs.SetFloat("SfxVolume", Sfxvolume);
-    }
+   
 
     private void LoadVolume()
     {
-        sliderVolume.value = PlayerPrefs.GetFloat("MusicVolume");
-    }
-    private void LoadSfx()
-    {
-        sliderVolume.value = PlayerPrefs.GetFloat("SfxVolume");
+        sliderVolume.value = PlayerPrefs.GetFloat(MixerMusic);
     }
 }

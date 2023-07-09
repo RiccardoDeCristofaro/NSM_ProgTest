@@ -8,7 +8,6 @@ public class Sound
 {
     [Header("sound Type")]
     [HideInInspector]
-    [SerializeField]
     public AudioSource customAudioSource;
     public AudioType _AudioType;
 
@@ -20,9 +19,9 @@ public class Sound
     public bool playOnAwake;
     public bool loop;
     [Range(0f, 1f)]
-    public float volume;
+    public float volume = .5f;
     [Range(-3f, 3f)]
-    public float pitch;
+    public float pitch = 1f;
     public bool isPlaying;
 
 }

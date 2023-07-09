@@ -5,6 +5,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [SerializeField] Animator monsterAnimator;
+    [SerializeField] GameObject wonMatch;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,6 +14,7 @@ public class Monster : MonoBehaviour
             monsterAnimator.enabled = true;
             monsterAnimator.SetBool("die", true);
             StartCoroutine(DelayDie());
+            wonMatch.gameObject.SetActive(true);
         }
 
         
