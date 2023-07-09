@@ -48,7 +48,11 @@ public class AudioManager : MonoBehaviour
     /// <summary>
     /// assembly definition should have this refence guid to call this method 
     /// </summary>
-    public void SoundPlay()
+    private void Start()
+    {
+        SoundPlay("Theme");
+    }
+    public void SoundPlay(string name)
     {
         Sound sound = Array.Find(sounds, sound => sound.name == name);
         if (sound == null)
@@ -56,5 +60,6 @@ public class AudioManager : MonoBehaviour
             Debug.LogError(string.Format($"sound inserted: {name} not found"));
             return;
         }
+        sound.customAudioSource?.Play();
     }
 }

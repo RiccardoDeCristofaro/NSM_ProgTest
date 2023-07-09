@@ -30,8 +30,8 @@ public class SettingsMenu : MonoBehaviour
     public void SetSfxVolume()
     {
         float Sfxvolume = sliderSfx.value;
-        audioMixer.SetFloat("Music", Mathf.Log10(Sfxvolume) * 20);
-        PlayerPrefs.SetFloat("MusicVolume", Sfxvolume);
+        audioMixer.SetFloat("SfxSound", Mathf.Log10(Sfxvolume) * 20);
+        PlayerPrefs.SetFloat("SfxVolume", Sfxvolume);
     }
 
     private void LoadVolume()
@@ -40,6 +40,6 @@ public class SettingsMenu : MonoBehaviour
     }
     private void LoadSfx()
     {
-        sliderVolume.value = PlayerPrefs.GetFloat("MusicVolume");
+        sliderVolume.value = PlayerPrefs.GetFloat("SfxVolume");
     }
 }

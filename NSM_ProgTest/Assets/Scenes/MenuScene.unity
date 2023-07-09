@@ -543,8 +543,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06eacf9f52d1704da695a1299b2e9ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
-  listeners: []
+  sounds:
+  - customAudioSource: {fileID: 0}
+    _AudioType: 0
+    name: Theme
+    audioClip: {fileID: 8300000, guid: d0bf1437f6cbd164baba5d661ba6e976, type: 3}
+    audioMixerGroup: {fileID: 7365920041363176796, guid: 100560528b8b4c94b97739cd8d059148, type: 2}
+    mute: 0
+    playOnAwake: 0
+    loop: 0
+    volume: 0.206
+    pitch: 0
+    isPlaying: 0
+  listeners:
+  - {fileID: 519420029}
 --- !u!1 &479160846
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,7 +912,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1195124442}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: SetSfxVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &689094957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,7 +1976,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1195124442}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: SetMusicVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1607716217
 GameObject:
   m_ObjectHideFlags: 0
