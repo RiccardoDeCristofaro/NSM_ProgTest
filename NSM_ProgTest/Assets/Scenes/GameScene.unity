@@ -161,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 8, y: 1.4669952}
+  m_AnchoredPosition: {x: 8, y: 1.46698}
   m_SizeDelta: {x: -290.0551, y: -145.2085}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &92813434
@@ -202,6 +202,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92813432}
   m_CullTransparentMesh: 1
+--- !u!1 &94554450 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4864393094573591455, guid: 15ea916c25141a445ba8f95621abb37a, type: 3}
+  m_PrefabInstance: {fileID: 4864393095169248185}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &109623736 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 188775335512769942, guid: 67d34c58d5410074384fb54655a3733d, type: 3}
@@ -551,6 +556,8 @@ MonoBehaviour:
   playerPos: {fileID: 320777264}
   overLapCircleRadius: 0.4
   arrow: {fileID: 4003833343136102428, guid: 20e9b87d9fa1918428c4c7e26ea24e2f, type: 3}
+  interactablegameObjects:
+  - {fileID: 94554450}
 --- !u!1 &265480486
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,7 +2890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.622711, y: 0.000015258789}
+  m_AnchoredPosition: {x: 10.622681, y: 0}
   m_SizeDelta: {x: -238.8973, y: -0.000061035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1635297454

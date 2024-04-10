@@ -2,9 +2,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using Unity.VisualScripting;
-using System.Runtime.InteropServices.WindowsRuntime;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,6 +28,12 @@ public class GameManager : MonoBehaviour
 
     [Header("arrow info")]
     [SerializeField] GameObject arrow;
+
+    [Header("enemie info")]
+    [SerializeField] List<GameObject> interactablegameObjects;
+    public int interactablegameObjectsrandomPos;
+
+
     void Start()
     {
         BlurredMap.origin = BackgroundMap.origin;
@@ -44,6 +48,13 @@ public class GameManager : MonoBehaviour
             BlurredMap.SetTile(blurTilespos, BlurredTile);
         }
         BlurredMap.transform.position = new Vector3(-.5f, -.5f, 0f);
+
+        for (int i = 0; i < interactablegameObjects.Count; i++)
+        {       
+            interactablegameObjectsrandomPos = Random.Range(-10, 10);
+            Debug.Log(interactablegameObjectsrandomPos);
+            interactablegameObjects[i].transform.position = new Vector3(interactablegameObjectsrandomPos,interactablegameObjectsrandomPos, 0);
+        }
     }
     private void Update()
     {

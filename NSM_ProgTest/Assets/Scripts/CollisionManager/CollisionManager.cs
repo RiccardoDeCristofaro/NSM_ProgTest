@@ -66,6 +66,7 @@ public class CollisionManager : MonoBehaviour
                 Debug.Log(collision.gameObject.name);
                 GetComponent<GridBasedMovement>().enabled = false;
                 EndGame.SetActive(true);
+                gameManager.interactablegameObjectsrandomPos = 0;
                 break;
 
             case "Puddle":
